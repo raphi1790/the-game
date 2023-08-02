@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "The Game"
+version = "0.1.0"
+description = ""
+authors = ["Raphael Schönenberger <raphael.schoenenberger@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.10.9"
+jax = {version = "0.4.6", extras = ["cpu"]}
+ipython = "*"
+jupyterlab = "^3.6.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
