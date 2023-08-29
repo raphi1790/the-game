@@ -4,3 +4,4 @@ class Card:
 
     def __str__(self):
         return f"Card of rank {self.rank}"
+    
