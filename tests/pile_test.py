@@ -5,19 +5,17 @@ from the_game.card import Card
 from the_game.pile import Pile
 
 def test_pile_init():
-    card = Card(10)
-    pile = Pile(min_value=0, max_value=15, direction="down", card=card)
+    pile = Pile(min_value=1, max_value=15, direction="down")
     assert pile.direction == "down"
-    assert pile.current_value == card.rank == 10
-    assert pile.min_value == 0
+    assert pile.current_value == 15
+    assert pile.min_value == 1
     assert pile.max_value == 15
 
 def test_set_card():
-    card_1 = Card(12)
-    pile = Pile(min_value=0, max_value=15, direction="down", card=card_1)
-    card_2 = Card(7)
-    pile.set_card(card_2)
+    pile = Pile(min_value=1, max_value=15, direction="down")
+    card = Card(7)
+    pile.set_card(card)
     assert pile.direction == "down"
-    assert pile.current_value == card_2.rank == 7
-    assert pile.min_value == 0
+    assert pile.current_value == card.rank == 7
+    assert pile.min_value == 1
     assert pile.max_value == 15

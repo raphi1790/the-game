@@ -2,14 +2,15 @@ from the_game.card import Card
 
 
 class Pile:
-    def __init__(self, min_value, max_value, direction, card:Card) -> None:
+    def __init__(self, min_value, max_value, direction) -> None:
         self.min_value = min_value
         self.max_value = max_value
-        self.current_value = card.rank 
         if direction == "up":
             self.direction = "up"
+            self.current_value = min_value
         else:
             self.direction = "down"
+            self.current_value = max_value
  
 
     def set_card(self, card):

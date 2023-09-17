@@ -2,17 +2,20 @@ from copy import deepcopy
 import numpy as np
 
 from the_game.dealer import Dealer
+from the_game.judger import Judger
+from the_game.pile import Pile
 from the_game.player import Player
 
 
 class TheGame:
 
-    def __init__(self, allow_step_back=False, num_players=2, num_cards=20, num_hand_cards=3):
+    def __init__(self, allow_step_back=False, num_players=2, min_card=1, max_card=15, num_hand_cards=3):
         self.allow_step_back = allow_step_back
         self.np_random = np.random.RandomState()
         self.num_players = num_players
         self.payoffs = [0 for _ in range(self.num_players)]
-        self.num_cards = num_cards
+        self.min_card = min_card
+        self.max_card = max_card
         self.num_hand_cards = num_hand_cards    
 
     def configure(self, game_config):
@@ -33,25 +36,19 @@ class TheGame:
         self.payoffs = [0 for _ in range(self.num_players)]
 
         # Initialize a dealer that can deal cards
-        self.dealer = Dealer(num_cards=self.num_cards, np_random=self.np_random)
+        self.dealer = Dealer(min_card=self.min_card, max_card=self.max_card, np_random=self.np_random)
 
         # Initialize four players to play the game
         self.players = [Player(i, self.np_random) for i in range(self.num_players)]
 
-        # Deal 7 cards to each player to prepare for the game
+        # Deal cards to each player to prepare for the game
         for player in self.players:
             self.dealer.deal_cards(player, self.num_hand_cards)
 
-        # Initialize a Round
-        # self.round = Round(self.dealer, self.num_players, self.np_random)
+        
+        self.piles = [Pile(min_value=self.min_card, max_value=self.max_card, direction="up") for _ in range(2)] + [Pile(min_value=self.min_card, max_value=self.max_card, direction="down") for _ in range(2)] 
+        
 
-  
-        # # Save the hisory for stepping back to the last state.
-        # self.history = []
-
-        # player_id = self.round.current_player
-        # state = self.get_state(player_id)
-        # return state, player_id
 
     def step(self, action):
         ''' Get the next state
