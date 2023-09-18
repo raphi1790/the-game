@@ -13,6 +13,6 @@ class Pile:
             self.current_value = max_value
  
 
-    def set_card(self, card):
+    def play_card(self, card):
         self.current_value = card.rank
         
