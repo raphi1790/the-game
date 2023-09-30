@@ -24,8 +24,11 @@ class Judger:
             return True
         return False
   
-    def get_legal_actions(self, player: Player, piles: List[Pile], dealer: Dealer, previous_actions: List[Action]):
+    def get_legal_actions(self, state):
         legal_actions = []
+        player = state['current_player']
+        piles = state['piles']
+        previous_actions = state['actions']
         hand = player.hand
         for card in hand:
             for pile in piles:
